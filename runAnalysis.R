@@ -82,7 +82,7 @@
   ExtractedData <- data.table(ExtractedData)
   TidyData <- aggregate(Label, ExtractedData, mean)
   TidyData <- TidyData[order(TidyData$Subject,TidyData$Activity),]
-  write.table(TidyData,file="TidyData", sep = ",",col.names=colnames(TidyData))
+  write.table(TidyData,file="TidyData", sep = ",",col.names=colnames(TidyData),row.name=FALSE)
 
  
  
