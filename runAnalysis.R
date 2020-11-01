@@ -21,7 +21,7 @@
 #- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
   
   setwd("~/Coursera/datasciencecoursera")
-  TestLabel      <- read.table("UCI HAR Dataset/test/y_test.txt", comment.char = "", colClasses="numeric")
+  TestLabel      <- read.table("./UCI HAR Dataset/test/y_test.txt", comment.char = "", colClasses="numeric")
   TestSet        <- read.table("./UCI HAR Dataset/test/x_test.txt", comment.char = "", colClasses="numeric")
   SubjectTest    <- read.table("./UCI HAR Dataset/test/subject_test.txt", comment.char = "", colClasses="numeric")
   TrainingLabel  <- read.table("./UCI HAR Dataset/train/y_train.txt", comment.char = "", colClasses="numeric")
@@ -79,11 +79,10 @@
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable
 # for each activity and each subject
-  ExtractedData <- data.table(ExtractedData)
-  TidyData <- aggregate(Label, ExtractedData, mean)
+  ExtractedData <- data.table(ExtractedData)  
+  TidyData <- aggregate(. ~Subject + Activity, ExtractedData, mean)
   TidyData <- TidyData[order(TidyData$Subject,TidyData$Activity),]
-  write.table(TidyData,file="TidyData", sep = ",",col.names=colnames(TidyData),row.name=FALSE)
-
+  write.table(TidyData,file="TidyData.txt", sep = ",",col.names=colnames(TidyData),row.name=FALSE)
  
  
  
